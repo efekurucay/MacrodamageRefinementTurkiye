@@ -13,6 +13,8 @@ class Data {
     this.bin = undefined;
     this.binPauseTime = 8;
     this.binPause = this.binPauseTime;
+    // Rastgele olarak %20 ihtimalle ampül olacak
+    this.isBulb = random(1) < 0.2;
   }
   
   refine(bin) {
@@ -75,8 +77,12 @@ class Data {
 
   show() {
     g.textFont('Courier');
-    // if the digit is ready to be binned, lerp to a large size proprtional to the pause time
-    const digitSize = this.binIt ? lerp(this.sz, baseSize * 2.5, map(this.binPause, this.binPauseTime, 0, 0, 1)) : this.sz;
+    
+    // Ampüller için özel boyutlandırma
+    const digitSize = this.isBulb 
+      ? (this.binIt ? lerp(this.sz, baseSize * 2.5, map(this.binPause, this.binPauseTime, 0, 0, 1)) : this.sz)
+      : baseSize;
+    
     g.textSize(digitSize);
     g.textAlign(CENTER, CENTER);
 
@@ -84,10 +90,30 @@ class Data {
     col.setAlpha(this.alpha);
     g.fill(col);
     g.stroke(col);    
-    g.text(this.num, this.x, this.y);
-    // rectMode(CENTER);
-    // noFill();
-    // square(this.x, this.y, r);
+
+    if (this.isBulb) {
+      // Ampül görseli çizimi - optimize edilmiş
+      g.push();
+      g.translate(this.x, this.y);
+      g.scale(digitSize / baseSize);
+      
+      // Ampül görselini çiz - optimize edilmiş boyut
+      g.tint(col);
+      g.imageMode(CENTER);
+      g.image(bulbImg, 0, 0, 20, 20);
+      
+      // Işık efekti - sadece seçiliyse göster
+      if (this.binIt) {
+        g.noStroke();
+        g.fill(col);
+        g.circle(0, -10, 8);
+      }
+      
+      g.pop();
+    } else {
+      // Normal sayı gösterimi
+      g.text(this.num, this.x, this.y);
+    }
   }
 
   resize(newX, newY) {

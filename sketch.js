@@ -81,11 +81,19 @@ let palette = mobilePalette;
 let macrodataFile;
 
 function preload() {
-  lumon = loadImage('images/lumon.png');
+  lumon = loadImage('images/lumon.png', () => {
+    lumon.resize(120, 120);
+    console.log('Lumon görseli yüklendi:', lumon.width, 'x', lumon.height);
+  });
   nopeImg = loadImage('images/nope.png');
   completedImg = loadImage('images/100.png');
   sharedImg = loadImage('images/clipboard.png');
   mdeGIF[0] = loadImage('images/mde.gif');
+  bulbImg = loadImage('images/bulb.png', () => {
+    // Ampül görselini optimize et
+    bulbImg.resize(100, 100);
+    console.log('Ampül görseli yüklendi:', bulbImg.width, 'x', bulbImg.height);
+  });
 
   crtShader = loadShader('shaders/crt.vert.glsl', 'shaders/crt.frag.glsl');
 }
@@ -459,16 +467,21 @@ function drawNumbers() {
         n = 0;
         num.goHome();
       } else {
-        num.x += random(-1, 1);
-        num.y += random(-1, 1);
+        // Sadece ampüller hareket etsin - optimize edilmiş
+        if (num.isBulb && frameCount % 2 === 0) { // Her 2 frame'de bir hareket et
+          num.x += random(-0.5, 0.5); // Hareket mesafesini azalt
+          num.y += random(-0.5, 0.5);
+        }
       }
 
       let sz = n * baseSize * 4 + baseSize;
       let d = dist(mouseX, mouseY, num.x, num.y);
       if (d < g.width * 0.1) {
-        //sz += map(d, 0, width * 0.1, 24, 0);
-        num.x += random(-1, 1);
-        num.y += random(-1, 1);
+        // Sadece ampüller büyüsün - optimize edilmiş
+        if (num.isBulb && frameCount % 2 === 0) { // Her 2 frame'de bir büyü
+          num.x += random(-0.5, 0.5);
+          num.y += random(-0.5, 0.5);
+        }
       } else {
         num.goHome();
       }

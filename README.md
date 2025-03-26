@@ -1,41 +1,44 @@
+# Macrodata Refinement Türkiye
 
-<!-- add Severance TV show Lumon Industries logo -->
+Bu oyun, Türkiye'deki adaletsizliğe karşı yapılan protestolara destek amaçlı ironik bir web uygulamasıdır. Lumon Industries'in distopik dünyasından ilham alınarak, Türkiye'nin farklı şehirlerinden gelen verileri işliyoruz.
 
-![](images/lumon-globe.png)
+![TURKIYE](images\lumon.png)
 
-# Macrodata Refinement
 
-Congratulations on your new job! All of us are thrilled you've become a part of Lumon Industries.
 
-From the humble beginnings of a small topical salve company to the world's leading pioneer in biotechnologies Lumon has thrived thanks to workers like you.
+## Nasıl Çalışır?
 
-Welcome to the Lumon Family!
+Her bir veri seti, Türkiye'nin farklı bir şehrinden geliyor. Veriler arasında sayılar ve ampüller bulunuyor. Ampüller gereksiz yük oluşturduğu için bunları tespit edip çöpe atmamız gerekiyor. :)
 
-https://lumon-industries.com
-
-## How will I know what to work on?
-
-First, you will be assigned a macrodata file. This selection has been made carefully by your superior.
-
-After opening your file you will be met with a sea of numbers that seems to stretch endlessly in all directions.
-
-Over time, certain clusters of numbers will start to make you feel a certain way.
-
-There are four categories of numbers, each of which elicits a different feeling. A refiner's job is to fill each of the five bins evenly with the four kinds of number clusters.
-
-Once every bin is properly filled, the file is 100% refined and the job is done.
+### Veri Kategorileri
 
 ```
-WO: These numbers elicit melancholy or despair.
-FC: These numbers elicit joy, gaiety or ecstasy.
-DR: These numbers elicit fear, anxiety or apprehension.
-MA: These numbers elicit rage or a desire to do harm.
+WO: Yolsuzluk uyandıran sayılar
+FC: Adaletsizlik uyandıran sayılar
+DR: Korku ve endişe uyandıran sayılar
+MA: Öfke ve isyan uyandıran sayılar
 ```
 
+## Oynanış
+
+1. Ekranda rastgele sayılar ve ampüller görünecek
+2. Ampülleri tespit edip çöpe atın (gereksiz yük)
+3. Sayıları duygusal kategorilerine göre sınıflandırın
+4. Her kutu için eşit sayıda veri toplayın
+
+## Şehirler
+
+Veriler Türkiye'nin 81 ilinden geliyor. 
 
 
-## Sample macrodata view
+## Teknik Detaylar
 
-This is a sample of what your file might look like. If you find clusters of numbers that look scary, you should bin them.
+Bu uygulama p5.js kullanılarak geliştirilmiştir ve şu özelliklere sahiptir:
+- Responsive tasarım
+- WebGL shader efektleri
+- Progressive Web App (PWA) desteği
+- LocalStorage ile ilerleme kaydı
 
-![](images/lumon-anim.gif)
+## Not
+
+Bu oyun, Türkiye'deki protestolara destek amaçlı ironik bir yorum olarak tasarlanmıştır. Ampüllerin gereksiz yük olarak işaretlenmesi, sistemin gereksiz yüklerinden kurtulma isteğini temsil etmektedir.
